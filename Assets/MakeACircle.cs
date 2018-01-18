@@ -10,35 +10,50 @@ public class MakeACircle : MonoBehaviour
     [SerializeField]
     private float radius;
 
-    private float timer = 5f;
+    private float timer = 1.5f;
     private float theta;
-    private Vector3[] points;
+    private List<Vector3> points;
     private float increment;
-    private int index;
+
     private void Start()
     {
         theta = 0f;
-        points = new Vector3[120];
+        points = new List<Vector3>();
         increment = (2f * Mathf.PI) / timer;
-        index = 0;
     }
 
     private void Update()
     {
-        MakeCircle();
+        if(Input.GetKey(KeyCode.Space))
+        {
+            MakeCircle();
+        }
+        else if(Input.GetKeyUp(KeyCode.Space))
+        {
+            theta = 0f;
+            circle.positionCount = 0;
+            points.Clear();
+        }
     }
 
     private void MakeCircle()
     {
-        if(index < points.Length)
+        if(theta < 2f * Mathf.PI)
         {
-            theta += increment * Time.deltaTime;
-
             var x = radius * Mathf.Cos(theta);
             var y = radius * Mathf.Sin(theta);
-            index++;
-            circle.positionCount = index;
-            circle.SetPosition(index - 1, new Vector3(x, y, 0f));
+            points.Add(new Vector3(x, y, 0f));
+            circle.positionCount = points.Count;
+
+            theta += increment * Time.deltaTime;
+
+            if(theta >= 2f * Mathf.PI)
+            {
+                points.Add(new Vector3(radius, 0.05f, 0f));
+                circle.positionCount = points.Count;
+            }
+
+            circle.SetPositions(points.ToArray());
         }
     }
 }
