@@ -1,8 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/MakeACircle.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/GoogleVR/Scripts/EventSystem/InputModule/GvrPointerInputModuleImpl.cs">
     <Files>
-      <File FileName="Assets/MakeACircle.cs" Line="11" Column="2" />
+      <File FileName="Assets/GoogleVR/Scripts/EventSystem/InputModule/GvrPointerInputModuleImpl.cs" Line="199" Column="19" />
+      <File FileName="Assets/MakeACircle.cs" Line="39" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

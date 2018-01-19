@@ -178,7 +178,10 @@
      <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrMathHelpers.cs" />
      <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrUIHelpers.cs" />
      <Compile Include="Assets\GoogleVR\Scripts\Video\GvrVideoPlayerTexture.cs" />
-     <Compile Include="Assets\MakeACircle.cs" />
+     <Compile Include="Assets\Scripts\AttackAction.cs" />
+     <Compile Include="Assets\Scripts\MoveAction.cs" />
+     <Compile Include="Assets\Scripts\RadialIndicator.cs" />
+     <Compile Include="Assets\Scripts\TaisenInteractable.cs" />
      <None Include="Assets\GoogleVR\Shaders\GvrUIOverlayFont.shader" />
      <None Include="Assets\GoogleVR\Plugins\Android\proguard-gvr.txt" />
      <None Include="Assets\GoogleVR\Shaders\GvrAdditiveOverlay.shader" />
