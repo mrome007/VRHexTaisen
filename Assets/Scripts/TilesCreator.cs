@@ -35,10 +35,11 @@ public class TilesCreator : MonoBehaviour
 
     private void Start()
     {
-        CreateTileGrid();
+        CreateHexTileGrid();
+        ConnectHexTileGrid();
     }
 
-    private void CreateTileGrid()
+    private void CreateHexTileGrid()
     {
         var parentObject = new GameObject("TileGridParent");
         int tileCount = 1;
@@ -62,4 +63,62 @@ public class TilesCreator : MonoBehaviour
         }
 
     }
+
+    private void ConnectHexTileGrid()
+    {
+        for(int rowIndex = 0; rowIndex < row; rowIndex++, zRowPosition += zRowPositionIncrement)
+        {
+            var even = rowIndex % 2 == 0;
+            for(int columnIndex = even ? 0 : 1; columnIndex < tileGrid.GetLength(0); columnIndex += 2, xPosition += xPositionIncrement)
+            {
+                ConnectHexTile(columnIndex, rowIndex, tileGrid[columnIndex, rowIndex]);
+            }
+        }
+    }
+
+    private void ConnectHexTile(int currentXPos, int currentYPos, HexTile tile)
+    {
+        var topLeft = new Vector2Int(currentXPos - 1, currentYPos + 1);
+        var left = new Vector2Int(currentXPos - 2, currentYPos);
+        var bottomLeft = new Vector2Int(currentXPos - 1, currentYPos - 1);
+        var bottomRight = new Vector2Int(currentXPos + 1, currentYPos - 1);
+        var right = new Vector2Int(currentXPos + 2, currentYPos);
+        var topRight = new Vector2Int(currentXPos + 1, currentYPos + 1);
+
+        ConnectTile(topLeft, tile);
+        ConnectTile(left, tile);
+        ConnectTile(bottomLeft, tile);
+        ConnectTile(bottomRight, tile);
+        ConnectTile(right, tile);
+        ConnectTile(topRight, tile);
+    }
+
+    private void ConnectTile(Vector2Int pos, HexTile tile)
+    {
+        if(IsPositionInGrid(pos.x, pos.y))
+        {
+            tile.AdjacentTiles.Add(tileGrid[pos.x, pos.y]);
+        }
+    }
+
+    private bool IsPositionInGrid(int xPos, int yPos)
+    {
+        return (xPos >= 0 && xPos < column * 2) && (yPos >= 0 && yPos < row);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
