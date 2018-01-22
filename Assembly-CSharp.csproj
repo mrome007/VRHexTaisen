@@ -186,7 +186,7 @@
      <Compile Include="Assets\Scripts\RadialIndicator.cs" />
      <Compile Include="Assets\Scripts\ReturnAction.cs" />
      <Compile Include="Assets\Scripts\TaisenInteractable.cs" />
-     <Compile Include="Assets\Scripts\TaisenUnit.cs" />
+     <Compile Include="Assets\Scripts\TaisenVRScan.cs" />
      <Compile Include="Assets\Scripts\TilesCreator.cs" />
      <None Include="Assets\GoogleVR\Shaders\GvrUIOverlayFont.shader" />
      <None Include="Assets\GoogleVR\Plugins\Android\proguard-gvr.txt" />

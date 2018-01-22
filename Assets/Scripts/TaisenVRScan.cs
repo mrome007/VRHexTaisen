@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TaisenUnit : MonoBehaviour 
+public class TaisenVRScan : MonoBehaviour 
 {
     [SerializeField]
     private List<GameObject> UnitActionUiGameObject;
@@ -35,30 +35,21 @@ public class TaisenUnit : MonoBehaviour
             {
                 if(currentInteractableObject == null)
                 {
-                    currentInteractableObject = hit.collider.gameObject;
-                    currentInteractableInterface = interactable;
-                    currentInteractableInterface.Success += HandleSuccess;
+                    AssignInteractable(hit, interactable);
                 }
                 else if(currentInteractableObject.GetInstanceID() != hit.collider.GetInstanceID())
                 {
                     currentInteractableInterface.Success -= HandleSuccess;
-
-                    currentInteractableObject = hit.collider.gameObject;
-                    currentInteractableInterface = interactable;
-                    currentInteractableInterface.Success += HandleSuccess;
+                    AssignInteractable(hit, interactable);
                 }
-
+                
                 currentInteractableInterface.Interact(true);
             }
             else
             {
                 if(currentInteractableInterface != null)
                 {
-                    currentInteractableInterface.Success -= HandleSuccess;
-                    currentInteractableInterface.Interact(false);
-                    
-                    currentInteractableObject = null;
-                    currentInteractableInterface = null;
+                    ResetInteractable();
                 }
             }
         }
@@ -66,11 +57,7 @@ public class TaisenUnit : MonoBehaviour
         {
             if(currentInteractableInterface != null)
             {
-                currentInteractableInterface.Success -= HandleSuccess;
-                currentInteractableInterface.Interact(false);
-
-                currentInteractableObject = null;
-                currentInteractableInterface = null;
+                ResetInteractable();
             }
         }
     }
@@ -103,6 +90,22 @@ public class TaisenUnit : MonoBehaviour
     {
         ReturnUiGameObject.SetActive(false);
         UnitActionUiGameObject.ForEach(ui => ui.SetActive(true));
+    }
+
+    private void ResetInteractable()
+    {
+        currentInteractableInterface.Success -= HandleSuccess;
+        currentInteractableInterface.Interact(false);
+        
+        currentInteractableObject = null;
+        currentInteractableInterface = null;
+    }
+
+    private void AssignInteractable(RaycastHit hit, ITaisenInteractable interactable)
+    {
+        currentInteractableObject = hit.collider.gameObject;
+        currentInteractableInterface = interactable;
+        currentInteractableInterface.Success += HandleSuccess;
     }
 }
 
