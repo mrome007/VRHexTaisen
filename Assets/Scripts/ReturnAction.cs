@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackAction : MonoBehaviour, ITaisenInteractable
+public class ReturnAction : MonoBehaviour, ITaisenInteractable
 {
     public event EventHandler<ActionEventArgs> Success;
     
@@ -13,7 +13,7 @@ public class AttackAction : MonoBehaviour, ITaisenInteractable
         if(success)
         {
             var handler = Success;
-            handler(this, new ActionEventArgs(ActionType.AttackUI));
+            handler(this, new ActionEventArgs(ActionType.ReturnUI));
         }
     }
 }

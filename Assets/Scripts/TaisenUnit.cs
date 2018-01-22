@@ -5,7 +5,7 @@ using UnityEngine;
 public class TaisenUnit : MonoBehaviour 
 {
     [SerializeField]
-    private GameObject MoveUiGameObject;
+    private List<GameObject> UnitActionUiGameObject;
 
     [SerializeField]
     private GameObject ReturnUiGameObject;
@@ -50,6 +50,17 @@ public class TaisenUnit : MonoBehaviour
 
                 currentInteractableInterface.Interact(true);
             }
+            else
+            {
+                if(currentInteractableInterface != null)
+                {
+                    currentInteractableInterface.Success -= HandleSuccess;
+                    currentInteractableInterface.Interact(false);
+                    
+                    currentInteractableObject = null;
+                    currentInteractableInterface = null;
+                }
+            }
         }
         else
         {
@@ -70,17 +81,28 @@ public class TaisenUnit : MonoBehaviour
         switch(e.actionType)
         {
             case ActionType.MoveUI:
-                HandleMoveMenuSuccess();
+            case ActionType.AttackUI:
+                HandleActionMenuSuccess();
                 break;
 
+            case ActionType.ReturnUI:
+                HandleReturnMenuSuccess();
+                break;
             default:
                 break;
         }
     }
 
-    private void HandleMoveMenuSuccess()
+    private void HandleActionMenuSuccess()
     {
-        MoveUiGameObject.SetActive(false);
+        UnitActionUiGameObject.ForEach(ui => ui.SetActive(false));
+        ReturnUiGameObject.SetActive(true);
+    }
+
+    private void HandleReturnMenuSuccess()
+    {
+        ReturnUiGameObject.SetActive(false);
+        UnitActionUiGameObject.ForEach(ui => ui.SetActive(true));
     }
 }
 
