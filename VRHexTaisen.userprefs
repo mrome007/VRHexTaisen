@@ -1,13 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TaisenInteractable.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TilesCreator.cs">
     <Files>
-      <File FileName="Assets/Scripts/TaisenInteractable.cs" Line="11" Column="41" />
-      <File FileName="Assets/Scripts/MoveAction.cs" Line="8" Column="5" />
-      <File FileName="Assets/GoogleVR/Scripts/EventSystem/GvrPointerGraphicRaycaster.cs" Line="31" Column="16" />
-      <File FileName="Assets/Scripts/RadialIndicator.cs" Line="15" Column="49" />
-      <File FileName="Assets/GoogleVR/Scripts/EventSystem/GvrEventInterfacesExtension.cs" Line="18" Column="28" />
-      <File FileName="Assets/Scripts/AttackAction.cs" Line="5" Column="47" />
+      <File FileName="Assets/Scripts/TilesCreator.cs" Line="71" Column="42" />
+      <File FileName="Assets/Scripts/HexTile.cs" Line="11" Column="45" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

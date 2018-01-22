@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public abstract class TaisenInteractable : MonoBehaviour, IGvrPointerHoverHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public event EventHandler Success;
+    //public event EventHandler Success;
 
     public virtual void OnGvrPointerHover(PointerEventData eventData)
     {
