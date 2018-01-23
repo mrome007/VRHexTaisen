@@ -33,6 +33,12 @@ public class TilesCreator : MonoBehaviour
         }
     }
 
+    //Improve later.
+    public HexTile GetRandomTile()
+    {
+        return tileGrid[0, 0];
+    }
+
     public void CreateTiles()
     {
         CreateHexTileGrid();

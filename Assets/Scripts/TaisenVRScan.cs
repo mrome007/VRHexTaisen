@@ -7,6 +7,9 @@ public class TaisenVRScan : MonoBehaviour
     [SerializeField]
     private TaisenUnitMenuActions unitMenu;
 
+    [SerializeField]
+    private TaisenUnitTurnActions turnActions;
+
     private GameObject currentInteractableObject = null;
     private ITaisenInteractable currentInteractableInterface = null;
     private Vector3 midScreen;
@@ -63,6 +66,7 @@ public class TaisenVRScan : MonoBehaviour
     {
         currentInteractableInterface.Success -= HandleScanSuccess;
         unitMenu.UnitMenuInteraction(e.actionType);
+        turnActions.TurnActionInteraction(e.actionType);
     }
 
     private void ResetInteractable()

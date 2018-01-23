@@ -7,17 +7,9 @@ public class HexTaisenTurnsController : MonoBehaviour
     [SerializeField]
     private List<TaisenUnitTurn> unitTurns;
 
-    [SerializeField]
-    private TilesCreator tilesCreator;
-
     private int currentUnitTurn;
 
-    private void Awake()
-    {
-        tilesCreator.CreateTiles();
-    }
-
-    private void Start()
+    public void StartHexTaisen()
     {
         StartUnitTurn();
     }

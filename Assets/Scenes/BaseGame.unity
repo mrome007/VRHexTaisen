@@ -513,6 +513,8 @@ GameObject:
   - component: {fileID: 869152278}
   - component: {fileID: 869152279}
   - component: {fileID: 869152280}
+  - component: {fileID: 869152281}
+  - component: {fileID: 869152282}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -550,6 +552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitMenu: {fileID: 869152279}
+  turnActions: {fileID: 869152281}
 --- !u!114 &869152279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,6 +581,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfActionsPerTurn: 3
+--- !u!114 &869152281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 869152276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9b1456302e594c579e283e3da94a032, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unit: {fileID: 869152282}
+--- !u!114 &869152282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 869152276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9060caf9b8068444db58bcf8245fb0a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1062643918
 Prefab:
   m_ObjectHideFlags: 0
@@ -715,6 +741,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1461177392}
   - component: {fileID: 1461177391}
+  - component: {fileID: 1461177393}
   m_Layer: 0
   m_Name: VRHexTaisen
   m_TagString: Untagged
@@ -735,7 +762,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitTurns:
   - {fileID: 869152280}
-  tilesCreator: {fileID: 1691599012}
 --- !u!4 &1461177392
 Transform:
   m_ObjectHideFlags: 0
@@ -749,6 +775,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1461177393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1461177390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf65002f6400466f8b69a75212945fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilesCreator: {fileID: 1691599012}
+  turnsController: {fileID: 1461177391}
 --- !u!1 &1691599011
 GameObject:
   m_ObjectHideFlags: 0
