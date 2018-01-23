@@ -19,5 +19,6 @@ public enum ActionType
     ReturnUI,
     MoveUI,
     AttackUI,
+    CatchUI,
     SeeInfo
 }

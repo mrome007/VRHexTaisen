@@ -5,10 +5,7 @@ using UnityEngine;
 public class TaisenVRScan : MonoBehaviour 
 {
     [SerializeField]
-    private List<GameObject> UnitActionUiGameObject;
-
-    [SerializeField]
-    private GameObject ReturnUiGameObject;
+    private TaisenUnitMenu unitMenu;
 
     private GameObject currentInteractableObject = null;
     private ITaisenInteractable currentInteractableInterface = null;
@@ -39,7 +36,7 @@ public class TaisenVRScan : MonoBehaviour
                 }
                 else if(currentInteractableObject.GetInstanceID() != hit.collider.GetInstanceID())
                 {
-                    currentInteractableInterface.Success -= HandleSuccess;
+                    currentInteractableInterface.Success -= HandleScanSuccess;
                     AssignInteractable(hit, interactable);
                 }
                 
@@ -62,39 +59,15 @@ public class TaisenVRScan : MonoBehaviour
         }
     }
 
-    private void HandleSuccess(object sender, ActionEventArgs e)
+    private void HandleScanSuccess(object sender, ActionEventArgs e)
     {
-        currentInteractableInterface.Success -= HandleSuccess;
-        switch(e.actionType)
-        {
-            case ActionType.MoveUI:
-            case ActionType.AttackUI:
-                HandleActionMenuSuccess();
-                break;
-
-            case ActionType.ReturnUI:
-                HandleReturnMenuSuccess();
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void HandleActionMenuSuccess()
-    {
-        UnitActionUiGameObject.ForEach(ui => ui.SetActive(false));
-        ReturnUiGameObject.SetActive(true);
-    }
-
-    private void HandleReturnMenuSuccess()
-    {
-        ReturnUiGameObject.SetActive(false);
-        UnitActionUiGameObject.ForEach(ui => ui.SetActive(true));
+        currentInteractableInterface.Success -= HandleScanSuccess;
+        unitMenu.UnitMenuInteraction(e.actionType);
     }
 
     private void ResetInteractable()
     {
-        currentInteractableInterface.Success -= HandleSuccess;
+        currentInteractableInterface.Success -= HandleScanSuccess;
         currentInteractableInterface.Interact(false);
         
         currentInteractableObject = null;
@@ -105,7 +78,7 @@ public class TaisenVRScan : MonoBehaviour
     {
         currentInteractableObject = hit.collider.gameObject;
         currentInteractableInterface = interactable;
-        currentInteractableInterface.Success += HandleSuccess;
+        currentInteractableInterface.Success += HandleScanSuccess;
     }
 }
 
