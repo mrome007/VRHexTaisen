@@ -5,7 +5,7 @@ using UnityEngine;
 public class TaisenVRScan : MonoBehaviour 
 {
     [SerializeField]
-    private TaisenUnitMenu unitMenu;
+    private TaisenUnitMenuActions unitMenu;
 
     private GameObject currentInteractableObject = null;
     private ITaisenInteractable currentInteractableInterface = null;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TaisenUnitMenu : MonoBehaviour 
+public class TaisenUnitMenuActions : MonoBehaviour 
 {
     [SerializeField]
     private List<GameObject> UnitActionUiGameObject;

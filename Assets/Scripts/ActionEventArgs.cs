@@ -20,5 +20,8 @@ public enum ActionType
     MoveUI,
     AttackUI,
     CatchUI,
+    MoveAction,
+    AttackAction,
+    CatchAction,
     SeeInfo
 }

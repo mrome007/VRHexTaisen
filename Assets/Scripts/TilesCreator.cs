@@ -33,7 +33,7 @@ public class TilesCreator : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void CreateTiles()
     {
         CreateHexTileGrid();
         ConnectHexTileGrid();

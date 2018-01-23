@@ -178,12 +178,14 @@
      <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrMathHelpers.cs" />
      <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrUIHelpers.cs" />
      <Compile Include="Assets\GoogleVR\Scripts\Video\GvrVideoPlayerTexture.cs" />
+     <Compile Include="Assets\HexTaisenTurnsController.cs" />
      <Compile Include="Assets\Scripts\ActionEventArgs.cs" />
      <Compile Include="Assets\Scripts\HexTile.cs" />
      <Compile Include="Assets\Scripts\ITaisenInteractable.cs" />
      <Compile Include="Assets\Scripts\RadialIndicator.cs" />
      <Compile Include="Assets\Scripts\TaisenInteractable.cs" />
-     <Compile Include="Assets\Scripts\TaisenUnitMenu.cs" />
+     <Compile Include="Assets\Scripts\TaisenUnitMenuActions.cs" />
+     <Compile Include="Assets\Scripts\TaisenUnitTurn.cs" />
      <Compile Include="Assets\Scripts\TaisenVRScan.cs" />
      <Compile Include="Assets\Scripts\TilesCreator.cs" />
      <Compile Include="Assets\Scripts\TimedInteractable.cs" />
