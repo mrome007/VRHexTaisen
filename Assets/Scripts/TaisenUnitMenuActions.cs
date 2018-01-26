@@ -13,6 +13,8 @@ public class TaisenUnitMenuActions : MonoBehaviour
     [SerializeField]
     private GameObject ReturnUiGameObject;
 
+    private ActionType currentAction;
+
     public void ResetUnitMenu()
     {
         ShowTaisenUnitMenu(true);
@@ -20,26 +22,47 @@ public class TaisenUnitMenuActions : MonoBehaviour
 
     public void UnitMenuInteraction(ActionType act)
     {
+        UnitMenuAction(act);
+        //Turn Actions
+        switch(act)
+        {
+            case ActionType.AttackAction:
+            case ActionType.CatchAction:
+            case ActionType.MoveAction:
+                UnitMenuAction(currentAction);
+                break;
+            
+            default:
+                break;
+        }
+    }
+
+    private void UnitMenuAction(ActionType act)
+    {
         switch(act)
         {
             case ActionType.ReturnUI:
                 Reset();
                 ShowTaisenUnitMenu(true);
+                currentAction = act;
                 break;
-
+                
             case ActionType.AttackUI:
                 ShowTaisenUnitMenu(false);
+                currentAction = act;
                 break;
-
+                
             case ActionType.MoveUI:
                 EnableMoveElements(true);
                 ShowTaisenUnitMenu(false);
+                currentAction = act;
                 break;
-
+                
             case ActionType.CatchUI:
                 ShowTaisenUnitMenu(false);
+                currentAction = act;
                 break;
-
+                
             default:
                 break;
         }

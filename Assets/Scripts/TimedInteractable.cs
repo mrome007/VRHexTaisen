@@ -16,6 +16,7 @@ public class TimedInteractable : MonoBehaviour, ITaisenInteractable
         var success = RadialIndicator.FillUpIndicator(hover);
         if(success)
         {
+            RadialIndicator.FillUpIndicator(false);
             var handler = Success;
             handler(this, new ActionEventArgs(actionType, gameObject));
         }

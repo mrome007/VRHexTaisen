@@ -65,8 +65,8 @@ public class TaisenVRScan : MonoBehaviour
     private void HandleScanSuccess(object sender, ActionEventArgs e)
     {
         currentInteractableInterface.Success -= HandleScanSuccess;
-        unitMenu.UnitMenuInteraction(e.ActionType);
         turnActions.TurnActionInteraction(e.ActionType, e.Interactable);
+        unitMenu.UnitMenuInteraction(e.ActionType);
     }
 
     private void ResetInteractable()
