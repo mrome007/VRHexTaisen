@@ -5,6 +5,9 @@ using UnityEngine;
 public class TaisenUnitMenuActions : MonoBehaviour 
 {
     [SerializeField]
+    private TaisenUnit unit;
+
+    [SerializeField]
     private List<GameObject> UnitActionUiGameObject;
     
     [SerializeField]
@@ -20,11 +23,19 @@ public class TaisenUnitMenuActions : MonoBehaviour
         switch(act)
         {
             case ActionType.ReturnUI:
+                Reset();
                 ShowTaisenUnitMenu(true);
                 break;
 
             case ActionType.AttackUI:
+                ShowTaisenUnitMenu(false);
+                break;
+
             case ActionType.MoveUI:
+                EnableMoveElements(true);
+                ShowTaisenUnitMenu(false);
+                break;
+
             case ActionType.CatchUI:
                 ShowTaisenUnitMenu(false);
                 break;
@@ -38,5 +49,16 @@ public class TaisenUnitMenuActions : MonoBehaviour
     {  
         UnitActionUiGameObject.ForEach(menu => menu.SetActive(show));
         ReturnUiGameObject.SetActive(!show);
+    }
+
+    private void EnableMoveElements(bool enable)
+    {
+        unit.OccupiedTile.AdjacentTiles.ForEach(adjTile => adjTile.EnableHexCollider(enable));
+        unit.OccupiedTile.AdjacentTiles.ForEach(adjTile => adjTile.HighlightHexTile(enable));
+    }
+
+    private void Reset()
+    {
+        EnableMoveElements(false);
     }
 }

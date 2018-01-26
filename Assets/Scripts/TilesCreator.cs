@@ -57,6 +57,7 @@ public class TilesCreator : MonoBehaviour
             for(int columnIndex = even ? 0 : 1; columnIndex < tileGrid.GetLength(0); columnIndex += 2, xPosition += xPositionIncrement)
             {
                 var tile = Instantiate(tileObject, new Vector3(xPosition, 0f, 0f), Quaternion.identity);
+                tile.EnableHexCollider(false);
                 tile.name += tileCount; 
                 tile.transform.parent = rowParent.transform;
                 tileGrid[columnIndex, rowIndex] = tile;

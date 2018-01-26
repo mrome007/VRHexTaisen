@@ -564,6 +564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4f9588fc56d46d587d2cc9ac89a258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unit: {fileID: 869152282}
   UnitActionUiGameObject:
   - {fileID: 1783277646}
   - {fileID: 1776668547}
@@ -788,6 +789,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilesCreator: {fileID: 1691599012}
   turnsController: {fileID: 1461177391}
+  units:
+  - {fileID: 869152282}
+  enemies: []
 --- !u!1 &1691599011
 GameObject:
   m_ObjectHideFlags: 0
