@@ -9,6 +9,11 @@ public class TaisenUnit : MonoBehaviour
     public void SetOccupiedTile(HexTile tile)
     {
         OccupiedTile = tile;
-        transform.position = new Vector3(tile.transform.position.x, transform.position.y, tile.transform.position.z);
+        MoveTaisenUnit(tile.transform);
+    }
+
+    private void MoveTaisenUnit(Transform tilePos)
+    {
+        transform.position = new Vector3(tilePos.position.x, transform.position.y, tilePos.position.z);
     }
 }

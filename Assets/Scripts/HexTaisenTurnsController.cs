@@ -21,7 +21,7 @@ public class HexTaisenTurnsController : MonoBehaviour
         turn.StartTurn();
     }
 
-    private void HandleTurnEnded (object sender, System.EventArgs e)
+    private void HandleTurnEnded(object sender, System.EventArgs e)
     {
         unitTurns[currentUnitTurn].TurnEnded -= HandleTurnEnded;
 

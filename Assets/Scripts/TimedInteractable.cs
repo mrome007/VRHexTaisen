@@ -17,7 +17,7 @@ public class TimedInteractable : MonoBehaviour, ITaisenInteractable
         if(success)
         {
             var handler = Success;
-            handler(this, new ActionEventArgs(actionType));
+            handler(this, new ActionEventArgs(actionType, gameObject));
         }
     }
 }

@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class ActionEventArgs : EventArgs 
 {
-    public ActionType actionType { get; private set; }
+    public ActionType ActionType { get; private set; }
+    public GameObject Interactable { get; private set; }
 
-    public ActionEventArgs(ActionType actType)
+    public ActionEventArgs(ActionType actType, GameObject interact)
     {
-        actionType = actType;
+        ActionType = actType;
+        Interactable = interact;
     }
 }
 
