@@ -49,7 +49,7 @@ public class TaisenVRScan : MonoBehaviour
                 if(gaze != currentGazeObject)
                 {
                     ClearCurrentObject();
-                    currentGazeObject = gaze;
+                    AssignCurrentObject(gaze);
                     gaze.OnGazeEnter(hit);
                     SetReticleColor(gazeColor);
                 }
@@ -71,12 +71,19 @@ public class TaisenVRScan : MonoBehaviour
         }
     }
 
+    private void AssignCurrentObject(GazeableObject gaze)
+    {
+        currentGazeObject = gaze;
+        currentGazeObject.Pressed += HandleGazeablePressed;
+    }
+
     private void ClearCurrentObject()
     {
         if(currentGazeObject != null)
         {
             currentGazeObject.OnGazeExit();
             SetReticleColor(originalColor);
+            currentGazeObject.Pressed += HandleGazeablePressed;
             currentGazeObject = null;
         }
     }
@@ -107,6 +114,16 @@ public class TaisenVRScan : MonoBehaviour
         {
             currentSelectableObject.OnRelease(hit);
             currentSelectableObject = null;
+        }
+    }
+
+    private void HandleGazeablePressed(object sender, ActionEventArgs actionArgs)
+    {
+        var button = currentGazeObject.GetComponent<TaisenGazeableButton>();
+        if(button != null)
+        {
+            turnActions.TurnActionInteraction(actionArgs.ActionType, actionArgs.Interactable);
+            unitMenu.UnitMenuInteraction(actionArgs.ActionType);
         }
     }
 }
