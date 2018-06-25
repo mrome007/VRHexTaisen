@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TaisenUnitMenuActions : MonoBehaviour 
+public class TaisenUnitMenuActions : TaisenVRCanvas
 {
-    [SerializeField]
-    private TaisenUnit unit;
-
     [SerializeField]
     private List<GameObject> UnitActionUiGameObject;
     

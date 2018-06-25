@@ -185,12 +185,14 @@
      <Compile Include="Assets\Scripts\HexTile.cs" />
      <Compile Include="Assets\Scripts\ITaisenInteractable.cs" />
      <Compile Include="Assets\Scripts\RadialIndicator.cs" />
+     <Compile Include="Assets\Scripts\TaisenDragZone.cs" />
      <Compile Include="Assets\Scripts\TaisenGazeableButton.cs" />
      <Compile Include="Assets\Scripts\TaisenInteractable.cs" />
      <Compile Include="Assets\Scripts\TaisenUnit.cs" />
      <Compile Include="Assets\Scripts\TaisenUnitMenuActions.cs" />
      <Compile Include="Assets\Scripts\TaisenUnitTurn.cs" />
      <Compile Include="Assets\Scripts\TaisenUnitTurnActions.cs" />
+     <Compile Include="Assets\Scripts\TaisenVRCanvas.cs" />
      <Compile Include="Assets\Scripts\TaisenVRScan.cs" />
      <Compile Include="Assets\Scripts\TilesCreator.cs" />
      <Compile Include="Assets\Scripts\TimedInteractable.cs" />
