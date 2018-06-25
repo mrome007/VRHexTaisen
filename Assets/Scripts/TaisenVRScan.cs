@@ -10,18 +10,30 @@ public class TaisenVRScan : MonoBehaviour
     [SerializeField]
     private TaisenUnitTurnActions turnActions;
 
-    private GameObject currentInteractableObject = null;
-    private ITaisenInteractable currentInteractableInterface = null;
+    [SerializeField]
+    private GameObject taisenReticle;
+
+    [SerializeField]
+    private Color originalColor;
+
+    [SerializeField]
+    private Color gazeColor;
+
     private Vector3 midScreen;
+    private GazeableObject currentGazeObject;
+    private GazeableObject currentSelectableObject;
+    private RaycastHit lastHit;
 
     private void Awake()
     {
         midScreen = new Vector3(0.5f, 0.5f, 0f);
+        SetReticleColor(originalColor);
     }
 
     private void Update()
     {
         CheckSurroundings();
+        CheckForInput(lastHit);
     }
 
     private void CheckSurroundings()
@@ -30,59 +42,72 @@ public class TaisenVRScan : MonoBehaviour
         var ray = Camera.main.ViewportPointToRay(midScreen);
         if(Physics.Raycast(ray, out hit, 50f))
         {
-            var interactable = hit.collider.gameObject.GetComponent<ITaisenInteractable>();
-            if(interactable != null)
+            var hitObject = hit.collider.gameObject;
+            var gaze = hitObject.GetComponent<GazeableObject>();
+            if(gaze != null)
             {
-                if(currentInteractableObject == null)
+                if(gaze != currentGazeObject)
                 {
-                    AssignInteractable(hit, interactable);
+                    ClearCurrentObject();
+                    currentGazeObject = gaze;
+                    gaze.OnGazeEnter(hit);
+                    SetReticleColor(gazeColor);
                 }
-                else if(currentInteractableObject.GetInstanceID() != hit.collider.GetInstanceID())
+                else
                 {
-                    currentInteractableInterface.Success -= HandleScanSuccess;
-                    AssignInteractable(hit, interactable);
+                    currentGazeObject.OnGaze(hit);
                 }
-                
-                currentInteractableInterface.Interact(true);
             }
             else
             {
-                if(currentInteractableInterface != null)
-                {
-                    ResetInteractable();
-                }
+                ClearCurrentObject();
             }
+
+            lastHit = hit;
         }
         else
         {
-            if(currentInteractableInterface != null)
-            {
-                ResetInteractable();
-            }
+            ClearCurrentObject();
         }
     }
 
-    private void HandleScanSuccess(object sender, ActionEventArgs e)
+    private void ClearCurrentObject()
     {
-        currentInteractableInterface.Success -= HandleScanSuccess;
-        turnActions.TurnActionInteraction(e.ActionType, e.Interactable);
-        unitMenu.UnitMenuInteraction(e.ActionType);
+        if(currentGazeObject != null)
+        {
+            currentGazeObject.OnGazeExit();
+            SetReticleColor(originalColor);
+            currentGazeObject = null;
+        }
     }
 
-    private void ResetInteractable()
+    private void SetReticleColor(Color reticleColor)
     {
-        currentInteractableInterface.Success -= HandleScanSuccess;
-        currentInteractableInterface.Interact(false);
-        
-        currentInteractableObject = null;
-        currentInteractableInterface = null;
+        var renderer = taisenReticle.GetComponent<Renderer>();
+        if(renderer != null)
+        {
+            renderer.material.SetColor("_Color", reticleColor);
+        }
     }
 
-    private void AssignInteractable(RaycastHit hit, ITaisenInteractable interactable)
+    private void CheckForInput(RaycastHit hit)
     {
-        currentInteractableObject = hit.collider.gameObject;
-        currentInteractableInterface = interactable;
-        currentInteractableInterface.Success += HandleScanSuccess;
+        if(Input.GetMouseButtonDown(0) && currentGazeObject != null)
+        {
+            currentSelectableObject = currentGazeObject;
+            currentSelectableObject.OnPress(hit);
+        }
+
+        if(Input.GetMouseButtonDown(0) && currentSelectableObject != null)
+        {
+            currentSelectableObject.OnHold(hit);
+        }
+
+        if(Input.GetMouseButtonUp(0) && currentSelectableObject != null)
+        {
+            currentSelectableObject.OnRelease(hit);
+            currentSelectableObject = null;
+        }
     }
 }
 

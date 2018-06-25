@@ -38,7 +38,6 @@ GameObject:
   - component: {fileID: 4302970978592688}
   - component: {fileID: 114375973783502766}
   - component: {fileID: 65154685659116826}
-  - component: {fileID: 114737400038673672}
   m_Layer: 0
   m_Name: HexTile
   m_TagString: Untagged
@@ -138,15 +137,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AdjacentTiles: []
---- !u!114 &114737400038673672
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1544246511879634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fec2f1ac771b42e6aa96d4a71c2efc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionType: 5
