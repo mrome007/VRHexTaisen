@@ -119,12 +119,8 @@ public class TaisenVRScan : MonoBehaviour
 
     private void HandleGazeablePressed(object sender, ActionEventArgs actionArgs)
     {
-        var button = currentGazeObject.GetComponent<TaisenGazeableButton>();
-        if(button != null)
-        {
-            turnActions.TurnActionInteraction(actionArgs.ActionType, actionArgs.Interactable);
-            unitMenu.UnitMenuInteraction(actionArgs.ActionType);
-        }
+        turnActions.TurnActionInteraction(actionArgs.ActionType, actionArgs.Interactable);
+        unitMenu.UnitMenuInteraction(actionArgs.ActionType);
     }
 }
 
