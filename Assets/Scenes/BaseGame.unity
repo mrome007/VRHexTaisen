@@ -479,6 +479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitTurns:
   - {fileID: 869152280}
+  - {fileID: 1536822948}
 --- !u!4 &1461177392
 Transform:
   m_ObjectHideFlags: 0
@@ -564,7 +565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99612a2e3dc5b4359b7e3d22d23ce8d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfActionsPerTurn: 3
+  numberOfActionsPerTurn: 0
   currentNumberOfActions: 0
 --- !u!4 &1536822949
 Transform:

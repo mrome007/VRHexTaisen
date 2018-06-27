@@ -20,6 +20,7 @@ public class TaisenUnitTurn : MonoBehaviour
 
     public void StartTurn()
     {
+        Debug.Log("^^ " + gameObject.name + "'s turn");
         currentNumberOfActions = 0;
         CheckTurns();
     }

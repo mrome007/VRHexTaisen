@@ -45,7 +45,18 @@ public class TilesCreator : MonoBehaviour
                 columnIndex++;
                 if(columnIndex >= column)
                 {
-                    columnIndex = 9;
+                    columnIndex -= 2;
+                }
+            }
+        }
+        else
+        {
+            if(columnIndex % 2 != 0)
+            {
+                columnIndex++;
+                if(columnIndex >= column)
+                {
+                    columnIndex -= 2;
                 }
             }
         }
@@ -118,13 +129,13 @@ public class TilesCreator : MonoBehaviour
     {
         if(IsPositionInGrid(pos.x, pos.y))
         {
-            tile.AdjacentTiles.Add(tileGrid[pos.x, pos.y]);
+            tile.AdjacentTiles.Add(tileGrid[pos.y, pos.x]);
         }
     }
 
     private bool IsPositionInGrid(int xPos, int yPos)
     {
-        return (xPos >= 0 && xPos < column * 2) && (yPos >= 0 && yPos < row);
+        return (xPos >= 0 && xPos < column) && (yPos >= 0 && yPos < row * 2);
     }
 }
 

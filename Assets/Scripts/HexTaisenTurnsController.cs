@@ -12,6 +12,7 @@ public class HexTaisenTurnsController : MonoBehaviour
     public void StartHexTaisen()
     {
         StartUnitTurn();
+        currentUnitTurn = 0;
     }
 
     private void StartUnitTurn()
