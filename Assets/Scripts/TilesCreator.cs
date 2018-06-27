@@ -24,11 +24,11 @@ public class TilesCreator : MonoBehaviour
     private void Awake()
     {
         tileGrid = new HexTile[column * 2, row];
-        for(int rowIndex = 0; rowIndex < row; rowIndex++)
+        for(int columnIndex = 0; columnIndex < column; columnIndex++)
         {
-            for(int columnIndex = 0; columnIndex < column * 2; columnIndex++)
+            for(int rowIndex = 0; rowIndex < row * 2; rowIndex++)
             {
-                tileGrid[columnIndex, rowIndex] = null;
+                tileGrid[rowIndex, columnIndex] = null;
             }
         }
     }
@@ -36,7 +36,21 @@ public class TilesCreator : MonoBehaviour
     //Improve later.
     public HexTile GetRandomTile()
     {
-        return tileGrid[0, 0];
+        var rowIndex = Random.Range(0, row * 2);
+        var columnIndex = Random.Range(0, column);
+        if(rowIndex % 2 != 0)
+        {
+            if(columnIndex % 2 == 0)
+            {
+                columnIndex++;
+                if(columnIndex >= column)
+                {
+                    columnIndex = 9;
+                }
+            }
+        }
+        columnIndex = Mathf.Clamp(columnIndex, 0, column);
+        return tileGrid[rowIndex, columnIndex];
     }
 
     public void CreateTiles()
@@ -49,18 +63,18 @@ public class TilesCreator : MonoBehaviour
     {
         var parentObject = new GameObject("TileGridParent");
         int tileCount = 1;
-        for(int rowIndex = 0; rowIndex < row; rowIndex++, zRowPosition += zRowPositionIncrement)
+        for(int rowIndex = 0; rowIndex < row * 2; rowIndex++, zRowPosition += zRowPositionIncrement)
         {
             var rowParent = new GameObject("TileRow" + rowIndex);
             var even = rowIndex % 2 == 0;
 
-            for(int columnIndex = even ? 0 : 1; columnIndex < tileGrid.GetLength(0); columnIndex += 2, xPosition += xPositionIncrement)
+            for(int columnIndex = even ? 0 : 1; columnIndex < tileGrid.GetLength(1); columnIndex += 2, xPosition += xPositionIncrement)
             {
                 var tile = Instantiate(tileObject, new Vector3(xPosition, 0f, 0f), Quaternion.identity);
                 tile.EnableHexCollider(false);
                 tile.name += tileCount; 
                 tile.transform.parent = rowParent.transform;
-                tileGrid[columnIndex, rowIndex] = tile;
+                tileGrid[rowIndex, columnIndex] = tile;
                 tileCount++;
             }
 
@@ -73,12 +87,12 @@ public class TilesCreator : MonoBehaviour
 
     private void ConnectHexTileGrid()
     {
-        for(int rowIndex = 0; rowIndex < row; rowIndex++, zRowPosition += zRowPositionIncrement)
+        for(int rowIndex = 0; rowIndex < row * 2; rowIndex++, zRowPosition += zRowPositionIncrement)
         {
             var even = rowIndex % 2 == 0;
-            for(int columnIndex = even ? 0 : 1; columnIndex < tileGrid.GetLength(0); columnIndex += 2, xPosition += xPositionIncrement)
+            for(int columnIndex = even ? 0 : 1; columnIndex < tileGrid.GetLength(1); columnIndex += 2, xPosition += xPositionIncrement)
             {
-                ConnectHexTile(columnIndex, rowIndex, tileGrid[columnIndex, rowIndex]);
+                ConnectHexTile(columnIndex, rowIndex, tileGrid[rowIndex, columnIndex]);
             }
         }
     }

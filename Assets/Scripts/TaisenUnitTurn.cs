@@ -41,11 +41,19 @@ public class TaisenUnitTurn : MonoBehaviour
     {
         if(currentNumberOfActions >= numberOfActionsPerTurn)
         {
-            var handler = TurnEnded;
-            if(handler != null)
-            {
-                handler(this, null);
-            }
+            StartCoroutine(DelayEndTurn());
+        }
+    }
+
+    //TODO Used to test whether turns between players cycle correctly.
+    private IEnumerator DelayEndTurn()
+    {
+        yield return new WaitForSeconds(5f);
+
+        var handler = TurnEnded;
+        if(handler != null)
+        {
+            handler(this, null);
         }
     }
 }

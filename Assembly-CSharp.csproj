@@ -179,6 +179,7 @@
      <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrUIHelpers.cs" />
      <Compile Include="Assets\GoogleVR\Scripts\Video\GvrVideoPlayerTexture.cs" />
      <Compile Include="Assets\Scripts\ActionEventArgs.cs" />
+     <Compile Include="Assets\Scripts\EnemyTaisenUnit.cs" />
      <Compile Include="Assets\Scripts\GazeableObject.cs" />
      <Compile Include="Assets\Scripts\HexTaisenStart.cs" />
      <Compile Include="Assets\Scripts\HexTaisenTurnsController.cs" />
