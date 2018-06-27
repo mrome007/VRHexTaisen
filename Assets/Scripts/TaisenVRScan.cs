@@ -83,7 +83,7 @@ public class TaisenVRScan : MonoBehaviour
         {
             currentGazeObject.OnGazeExit();
             SetReticleColor(originalColor);
-            currentGazeObject.Pressed += HandleGazeablePressed;
+            currentGazeObject.Pressed -= HandleGazeablePressed;
             currentGazeObject = null;
         }
     }

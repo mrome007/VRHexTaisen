@@ -10,6 +10,7 @@ public class TaisenUnitTurn : MonoBehaviour
     [SerializeField]
     private int numberOfActionsPerTurn = 3;
 
+    [SerializeField]//TODO temporary so I can see in the inspector.
     private int currentNumberOfActions;
 
     private void Awake()
@@ -20,12 +21,20 @@ public class TaisenUnitTurn : MonoBehaviour
     public void StartTurn()
     {
         currentNumberOfActions = 0;
+        CheckTurns();
     }
 
-    public void TaisenAct()
+    public bool TaisenAct(int numActions)
     {
-        currentNumberOfActions++;
+        var success = (currentNumberOfActions + numActions) <= numberOfActionsPerTurn;
+        if(success)
+        {
+            currentNumberOfActions += numActions;
+        }
+
         CheckTurns();
+
+        return success;
     }
 
     private void CheckTurns()
