@@ -45,7 +45,7 @@ public class TaisenUnitTurn : MonoBehaviour
         }
         else
         {
-            DelayEndTurn();
+            StartCoroutine(DelayEndTurn());
         }
     }
 

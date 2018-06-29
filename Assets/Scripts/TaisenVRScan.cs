@@ -172,16 +172,19 @@ public class TaisenVRScan : TaisenUnitTurn
     private void HandleGazeablePressed(object sender, ActionEventArgs actionArgs)
     {
         var points = GetActionPoints(actionArgs.ActionType);
+
         if(CanTaisenAct(points))
         {
             CommitAction(points);
-            turnActions.TurnActionInteraction(actionArgs.ActionType, actionArgs.Interactable);
             unitMenu.UnitMenuInteraction(ActionType.ReturnUI);
+            turnActions.TurnActionInteraction(actionArgs.ActionType, actionArgs.Interactable);
         }
+
         if(points == 0)
         {
             unitMenu.UnitMenuInteraction(actionArgs.ActionType);
         }
+
     }
 
     protected override void HandleActionBegin(object sender, System.EventArgs e)

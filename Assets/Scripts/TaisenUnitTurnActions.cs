@@ -46,7 +46,7 @@ public class TaisenUnitTurnActions : MonoBehaviour
 
         Debug.Log("Move Action");
 
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(2f);
         yield return StartCoroutine(MoveConclusion());
     }
 
