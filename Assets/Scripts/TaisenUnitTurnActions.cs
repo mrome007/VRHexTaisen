@@ -23,7 +23,7 @@ public class TaisenUnitTurnActions : MonoBehaviour
             case ActionType.MoveAction:
                 StartCoroutine(MoveAction(interactable));
                 break;
-            
+            /*
             case ActionType.AttackAction:
 
                 break;
@@ -31,7 +31,7 @@ public class TaisenUnitTurnActions : MonoBehaviour
             case ActionType.CatchAction:
 
                 break;
-
+            */
             default:
                 break;
         }
@@ -46,7 +46,7 @@ public class TaisenUnitTurnActions : MonoBehaviour
 
         Debug.Log("Move Action");
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(10f);
         yield return StartCoroutine(MoveConclusion());
     }
 
@@ -54,6 +54,8 @@ public class TaisenUnitTurnActions : MonoBehaviour
     {
         yield return null;
         PostActionComplete();
+
+        Debug.Log("End Move Action");
     }
 
     private void PostActionComplete()

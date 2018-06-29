@@ -33,21 +33,32 @@ public class TaisenVRScan : TaisenUnitTurn
     public override void StartTurn()
     {
         Debug.Log("^^ " + gameObject.name + "'s turn");
+        RegisterActionEvents();
         PostStartTurn();
         currentNumberOfActions = 0;
-        var canAct = TaisenAct(0);
+        unitMenu.ShowTaisenUnitMenu(true);
+        var canAct = CanTaisenAct(1);
         if(canAct)
         {
             BeginPlayerScan();
         }
+        else
+        {
+            EndTurn();
+        }
     }
 
-    protected override void CheckTurns()
+    protected override void EndTurn()
     {
-        if(currentNumberOfActions >= numberOfActionsPerTurn)
-        {
-            PostEndTurn();
-        }
+        base.EndTurn();
+        EndPlayerScan();
+    }
+
+    protected override void ContinueTurn()
+    {
+        base.ContinueTurn();
+        BeginPlayerScan();
+        unitMenu.ShowTaisenUnitMenu(true);
     }
 
     private void BeginPlayerScan()
@@ -160,8 +171,37 @@ public class TaisenVRScan : TaisenUnitTurn
 
     private void HandleGazeablePressed(object sender, ActionEventArgs actionArgs)
     {
-        turnActions.TurnActionInteraction(actionArgs.ActionType, actionArgs.Interactable);
-        unitMenu.UnitMenuInteraction(actionArgs.ActionType);
+        var points = GetActionPoints(actionArgs.ActionType);
+        if(CanTaisenAct(points))
+        {
+            CommitAction(points);
+            turnActions.TurnActionInteraction(actionArgs.ActionType, actionArgs.Interactable);
+            unitMenu.UnitMenuInteraction(ActionType.ReturnUI);
+        }
+        if(points == 0)
+        {
+            unitMenu.UnitMenuInteraction(actionArgs.ActionType);
+        }
+    }
+
+    protected override void HandleActionBegin(object sender, System.EventArgs e)
+    {
+        base.HandleActionBegin(sender, e);
+        EndPlayerScan();
+        unitMenu.ShowTaisenUnitMenu(false);
+    }
+
+    protected override void HandleActionComplete(object sender, System.EventArgs e)
+    {
+        var canAct = CanTaisenAct(1);
+        if(canAct)
+        {
+            ContinueTurn();
+        }
+        else
+        {
+            EndTurn();
+        }
     }
 }
 

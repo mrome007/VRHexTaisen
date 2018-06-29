@@ -14,24 +14,12 @@ public class TaisenUnitMenuActions : TaisenVRCanvas
 
     public void ResetUnitMenu()
     {
-        ShowTaisenUnitMenu(true);
+        ShowTaisenUnitMenuScan(true);
     }
 
     public void UnitMenuInteraction(ActionType act)
     {
         UnitMenuAction(act);
-        //Turn Actions
-        switch(act)
-        {
-            case ActionType.AttackAction:
-            case ActionType.CatchAction:
-            case ActionType.MoveAction:
-                UnitMenuAction(currentAction);
-                break;
-            
-            default:
-                break;
-        }
     }
 
     private void UnitMenuAction(ActionType act)
@@ -40,23 +28,23 @@ public class TaisenUnitMenuActions : TaisenVRCanvas
         {
             case ActionType.ReturnUI:
                 Reset();
-                ShowTaisenUnitMenu(true);
+                ShowTaisenUnitMenuScan(true);
                 currentAction = act;
                 break;
                 
             case ActionType.AttackUI:
-                ShowTaisenUnitMenu(false);
+                ShowTaisenUnitMenuScan(false);
                 currentAction = act;
                 break;
                 
             case ActionType.MoveUI:
                 EnableMoveElements(true);
-                ShowTaisenUnitMenu(false);
+                ShowTaisenUnitMenuScan(false);
                 currentAction = act;
                 break;
                 
             case ActionType.CatchUI:
-                ShowTaisenUnitMenu(false);
+                ShowTaisenUnitMenuScan(false);
                 currentAction = act;
                 break;
                 
@@ -65,10 +53,16 @@ public class TaisenUnitMenuActions : TaisenVRCanvas
         }
     }
 
-    private void ShowTaisenUnitMenu(bool show)
+    private void ShowTaisenUnitMenuScan(bool show)
     {  
         UnitActionUiGameObject.ForEach(menu => menu.SetActive(show));
         ReturnUiGameObject.SetActive(!show);
+    }
+
+    public void ShowTaisenUnitMenu(bool show)
+    {
+        UnitActionUiGameObject.ForEach(menu => menu.SetActive(show));
+        ReturnUiGameObject.SetActive(show);
     }
 
     private void EnableMoveElements(bool enable)

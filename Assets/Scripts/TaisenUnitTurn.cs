@@ -38,7 +38,15 @@ public class TaisenUnitTurn : MonoBehaviour
         RegisterActionEvents();
         PostStartTurn();
         currentNumberOfActions = 0;
-        TaisenAct(0);
+        var canAct = CanTaisenAct(1);
+        if(canAct)
+        {
+            //Do something. TODO AI to pick random actions.
+        }
+        else
+        {
+            DelayEndTurn();
+        }
     }
 
     protected virtual void RegisterActionEvents()
@@ -58,26 +66,18 @@ public class TaisenUnitTurn : MonoBehaviour
 
     }
 
-    protected bool TaisenAct(int numActions)
+    protected bool CanTaisenAct(int numActions)
     {
         var success = (currentNumberOfActions + numActions) <= numberOfActionsPerTurn;
-        if(success)
-        {
-            currentNumberOfActions += numActions;
-        }
         return success;
     }
 
-    protected virtual void CheckTurns()
+    protected void CommitAction(int numActions)
     {
-        if(currentNumberOfActions >= numberOfActionsPerTurn)
-        {
-            //PostEndTurn()
-            StartCoroutine(DelayEndTurn());
-        }
+        currentNumberOfActions += numActions;
     }
 
-    public virtual void EndTurn()
+    protected virtual void EndTurn()
     {
         UnRegisterActionEvents();
         PostEndTurn();
@@ -113,5 +113,39 @@ public class TaisenUnitTurn : MonoBehaviour
 
     protected virtual void HandleActionComplete (object sender, EventArgs e)
     {
+        var canAct = CanTaisenAct(1);
+        if(canAct)
+        {
+            ContinueTurn();
+        }
+        else
+        {
+            DelayEndTurn();
+        }
+    }
+
+    protected int GetActionPoints(ActionType actType)
+    {
+        var tryActPoints = 0;
+
+        switch(actType)
+        {
+            case ActionType.AttackAction:
+                tryActPoints = attackActionPoints;
+                break;
+
+            case ActionType.MoveAction:
+                tryActPoints = moveActionPoints;
+                break;
+
+            case ActionType.CatchAction:
+                tryActPoints = catchActionPoints;
+                break;
+
+             default:
+                break;
+        }
+
+        return tryActPoints;
     }
 }

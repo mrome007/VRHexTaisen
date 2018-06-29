@@ -22,10 +22,14 @@ public class HexTaisenTurnsController : MonoBehaviour
         turn.TurnStarted += HandleTurnStarted;
         turn.TurnEnded += HandleTurnEnded;
         turn.StartTurn();
+
+        Debug.Log("Starting " + turn.gameObject.name + "'s Turn.");
     }
 
     private void HandleTurnEnded(object sender, EventArgs args)
     {
+        Debug.Log("Ending " + unitTurns[currentUnitTurn].gameObject.name + "'s Turn.");
+
         unitTurns[currentUnitTurn].TurnEnded -= HandleTurnEnded;
 
         currentUnitTurn++;
