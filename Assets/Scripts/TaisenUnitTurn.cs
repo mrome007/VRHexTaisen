@@ -3,58 +3,115 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(TaisenUnitTurnActions))]
 public class TaisenUnitTurn : MonoBehaviour 
 {
+    public event EventHandler TurnStarted;
     public event EventHandler TurnEnded;
 
     [SerializeField]
-    private int numberOfActionsPerTurn = 3;
+    protected int numberOfActionsPerTurn = 3;
 
-    [SerializeField]//TODO temporary so I can see in the inspector.
-    private int currentNumberOfActions;
+    [SerializeField]
+    protected int currentNumberOfActions;
 
-    private void Awake()
+    [SerializeField]
+    protected int moveActionPoints = 1;
+
+    [SerializeField]
+    protected int attackActionPoints = 2;
+
+    [SerializeField]
+    protected int catchActionPoints = 2;
+
+    protected TaisenUnitTurnActions turnActions;
+
+    protected virtual void Awake()
     {
         currentNumberOfActions = 0;
+        turnActions = GetComponent<TaisenUnitTurnActions>();
     }
 
-    public void StartTurn()
+    public virtual void StartTurn()
     {
         Debug.Log("^^ " + gameObject.name + "'s turn");
+        RegisterActionEvents();
+        PostStartTurn();
         currentNumberOfActions = 0;
-        CheckTurns();
+        TaisenAct(0);
     }
 
-    public bool TaisenAct(int numActions)
+    protected virtual void RegisterActionEvents()
+    {
+        turnActions.ActionBegin += HandleActionBegin;
+        turnActions.ActionComplete += HandleActionComplete;
+    }
+
+    protected virtual void UnRegisterActionEvents()
+    {
+        turnActions.ActionBegin -= HandleActionBegin;
+        turnActions.ActionComplete -= HandleActionComplete;
+    }
+
+    protected virtual void ContinueTurn()
+    {
+
+    }
+
+    protected bool TaisenAct(int numActions)
     {
         var success = (currentNumberOfActions + numActions) <= numberOfActionsPerTurn;
         if(success)
         {
             currentNumberOfActions += numActions;
         }
-
-        CheckTurns();
-
         return success;
     }
 
-    private void CheckTurns()
+    protected virtual void CheckTurns()
     {
         if(currentNumberOfActions >= numberOfActionsPerTurn)
         {
+            //PostEndTurn()
             StartCoroutine(DelayEndTurn());
         }
     }
 
-    //TODO Used to test whether turns between players cycle correctly.
-    private IEnumerator DelayEndTurn()
+    public virtual void EndTurn()
+    {
+        UnRegisterActionEvents();
+        PostEndTurn();
+    }
+
+    protected IEnumerator DelayEndTurn()
     {
         yield return new WaitForSeconds(5f);
+        EndTurn();
+    }
 
+    protected void PostEndTurn()
+    {
         var handler = TurnEnded;
         if(handler != null)
         {
             handler(this, null);
         }
+    }
+
+    protected void PostStartTurn()
+    {
+        var handler = TurnStarted;
+        if(handler != null)
+        {
+            handler(this, null);
+        }
+    }
+
+    protected virtual void HandleActionBegin(object sender, EventArgs e)
+    {
+    }
+
+    protected virtual void HandleActionComplete (object sender, EventArgs e)
+    {
     }
 }

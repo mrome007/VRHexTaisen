@@ -3,27 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(TaisenUnit))]
 public class TaisenUnitTurnActions : MonoBehaviour 
 {
-    public event EventHandler TurnActionSuccess;
-    public event EventHandler TurnActionFailed;
+    public event EventHandler ActionBegin;
+    public event EventHandler ActionComplete;
 
     private TaisenUnit unit;
-    private TaisenUnitTurn unitTurn;
 
     private void Awake()
     {
         unit = GetComponent<TaisenUnit>();
-        if(unit == null)
-        {
-            Debug.LogError("Requires a TaisenUnit component.");
-        }
-
-        unitTurn = GetComponent<TaisenUnitTurn>();
-        if(unitTurn == null)
-        {
-            Debug.LogError("Requires a TaiseUnitTurn component.");
-        }
     }
 
     public void TurnActionInteraction(ActionType act, GameObject interactable)
@@ -31,7 +21,7 @@ public class TaisenUnitTurnActions : MonoBehaviour
         switch(act)
         {
             case ActionType.MoveAction:
-                MoveAction(interactable);
+                StartCoroutine(MoveAction(interactable));
                 break;
             
             case ActionType.AttackAction:
@@ -47,25 +37,37 @@ public class TaisenUnitTurnActions : MonoBehaviour
         }
     }
 
-    private void MoveAction(GameObject interactable)
+    private IEnumerator MoveAction(GameObject interactable)
     {
-        var success = unitTurn.TaisenAct(1); //TODO 1 for now.
-
-        PostSuccessfulAction(success);
-
-        if(!success)
-        {
-            return;
-        }
-
+        PostActionBegin();
         unit.OccupiedTile.AdjacentTiles.ForEach(adjTile => adjTile.EnableHexCollider(false));
         unit.OccupiedTile.AdjacentTiles.ForEach(adjTile => adjTile.HighlightHexTile(false));
         unit.SetOccupiedTile(interactable.GetComponent<HexTile>());
+
+        Debug.Log("Move Action");
+
+        yield return new WaitForSeconds(2f);
+        yield return StartCoroutine(MoveConclusion());
     }
 
-    private void PostSuccessfulAction(bool success)
+    private IEnumerator MoveConclusion()
     {
-        var handler = success ? TurnActionSuccess : TurnActionFailed;
+        yield return null;
+        PostActionComplete();
+    }
+
+    private void PostActionComplete()
+    {
+        var handler = ActionComplete;
+        if(handler != null)
+        {
+            handler(this, null);
+        }
+    }
+
+    private void PostActionBegin()
+    {
+        var handler = ActionBegin;
         if(handler != null)
         {
             handler(this, null);

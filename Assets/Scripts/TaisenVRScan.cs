@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TaisenVRScan : MonoBehaviour 
+public class TaisenVRScan : TaisenUnitTurn
 {
     [SerializeField]
     private TaisenUnitMenuActions unitMenu;
-
-    [SerializeField]
-    private TaisenUnitTurnActions turnActions;
 
     [SerializeField]
     private GameObject taisenReticle;
@@ -23,17 +20,61 @@ public class TaisenVRScan : MonoBehaviour
     private GazeableObject currentGazeObject;
     private GazeableObject currentSelectableObject;
     private RaycastHit lastHit;
+    private Coroutine taisenScanRoutine;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         midScreen = new Vector3(0.5f, 0.5f, 0f);
         SetReticleColor(originalColor);
+        taisenScanRoutine = null;
     }
 
-    private void Update()
+    public override void StartTurn()
     {
-        CheckSurroundings();
-        CheckForInput(lastHit);
+        Debug.Log("^^ " + gameObject.name + "'s turn");
+        PostStartTurn();
+        currentNumberOfActions = 0;
+        var canAct = TaisenAct(0);
+        if(canAct)
+        {
+            BeginPlayerScan();
+        }
+    }
+
+    protected override void CheckTurns()
+    {
+        if(currentNumberOfActions >= numberOfActionsPerTurn)
+        {
+            PostEndTurn();
+        }
+    }
+
+    private void BeginPlayerScan()
+    {
+        if(taisenScanRoutine == null)
+        {
+            taisenScanRoutine = StartCoroutine(VRScan());
+        }
+    }
+
+    private void EndPlayerScan()
+    {
+        if(taisenScanRoutine != null)
+        {
+            StopCoroutine(taisenScanRoutine);
+            taisenScanRoutine = null;
+        }
+    }
+
+    private IEnumerator VRScan()
+    {
+        while(true)
+        {
+            CheckSurroundings();
+            CheckForInput(lastHit);
+            yield return null;
+        }
     }
 
     private void CheckSurroundings()
