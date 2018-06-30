@@ -6,8 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(TaisenUnit))]
 public class TaisenUnitTurnActions : MonoBehaviour 
 {
-    public event EventHandler ActionBegin;
-    public event EventHandler ActionComplete;
+    public event EventHandler<TurnActionEventArgs> ActionBegin;
+    public event EventHandler<TurnActionEventArgs> ActionComplete;
 
     private TaisenUnit unit;
 
@@ -39,7 +39,7 @@ public class TaisenUnitTurnActions : MonoBehaviour
 
     private IEnumerator MoveAction(GameObject interactable)
     {
-        PostActionBegin();
+        PostActionBegin(new TurnActionEventArgs(false));
         unit.OccupiedTile.AdjacentTiles.ForEach(adjTile => adjTile.EnableHexCollider(false));
         unit.OccupiedTile.AdjacentTiles.ForEach(adjTile => adjTile.HighlightHexTile(false));
         unit.SetOccupiedTile(interactable.GetComponent<HexTile>());
@@ -53,26 +53,26 @@ public class TaisenUnitTurnActions : MonoBehaviour
     private IEnumerator MoveConclusion()
     {
         yield return null;
-        PostActionComplete();
+        PostActionComplete(new TurnActionEventArgs(false));
 
         Debug.Log("End Move Action");
     }
 
-    private void PostActionComplete()
+    private void PostActionComplete(TurnActionEventArgs args)
     {
         var handler = ActionComplete;
         if(handler != null)
         {
-            handler(this, null);
+            handler(this, args);
         }
     }
 
-    private void PostActionBegin()
+    private void PostActionBegin(TurnActionEventArgs args)
     {
         var handler = ActionBegin;
         if(handler != null)
         {
-            handler(this, null);
+            handler(this, args);
         }
     }
 }

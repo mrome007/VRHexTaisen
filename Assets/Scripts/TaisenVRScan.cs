@@ -187,15 +187,20 @@ public class TaisenVRScan : TaisenUnitTurn
 
     }
 
-    protected override void HandleActionBegin(object sender, System.EventArgs e)
+    protected override void HandleActionBegin(object sender, TurnActionEventArgs args)
     {
-        base.HandleActionBegin(sender, e);
         EndPlayerScan();
         unitMenu.ShowTaisenUnitMenu(false);
     }
 
-    protected override void HandleActionComplete(object sender, System.EventArgs e)
+    protected override void HandleActionComplete(object sender, TurnActionEventArgs args)
     {
+        if(args.IsFinal)
+        {
+            EndTurn();
+            return;
+        }
+
         var canAct = CanTaisenAct(1);
         if(canAct)
         {

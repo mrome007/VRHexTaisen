@@ -107,12 +107,18 @@ public class TaisenUnitTurn : MonoBehaviour
         }
     }
 
-    protected virtual void HandleActionBegin(object sender, EventArgs e)
+    protected virtual void HandleActionBegin(object sender, TurnActionEventArgs args)
     {
     }
 
-    protected virtual void HandleActionComplete (object sender, EventArgs e)
+    protected virtual void HandleActionComplete (object sender, TurnActionEventArgs args)
     {
+        if(args.IsFinal)
+        {
+            DelayEndTurn();
+            return;
+        }
+        
         var canAct = CanTaisenAct(1);
         if(canAct)
         {

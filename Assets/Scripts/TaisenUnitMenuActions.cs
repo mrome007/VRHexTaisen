@@ -10,8 +10,6 @@ public class TaisenUnitMenuActions : TaisenVRCanvas
     [SerializeField]
     private GameObject ReturnUiGameObject;
 
-    private ActionType currentAction;
-
     public void ResetUnitMenu()
     {
         ShowTaisenUnitMenuScan(true);
@@ -29,23 +27,19 @@ public class TaisenUnitMenuActions : TaisenVRCanvas
             case ActionType.ReturnUI:
                 Reset();
                 ShowTaisenUnitMenuScan(true);
-                currentAction = act;
                 break;
                 
             case ActionType.AttackUI:
                 ShowTaisenUnitMenuScan(false);
-                currentAction = act;
                 break;
                 
             case ActionType.MoveUI:
                 EnableMoveElements(true);
                 ShowTaisenUnitMenuScan(false);
-                currentAction = act;
                 break;
                 
             case ActionType.CatchUI:
                 ShowTaisenUnitMenuScan(false);
-                currentAction = act;
                 break;
                 
             default:

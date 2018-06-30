@@ -197,6 +197,7 @@
      <Compile Include="Assets\Scripts\TaisenVRScan.cs" />
      <Compile Include="Assets\Scripts\TilesCreator.cs" />
      <Compile Include="Assets\Scripts\TimedInteractable.cs" />
+     <Compile Include="Assets\Scripts\TurnActionEventArgs.cs" />
      <None Include="Assets\GoogleVR\Shaders\GvrUIOverlayFont.shader" />
      <None Include="Assets\GoogleVR\Plugins\Android\proguard-gvr.txt" />
      <None Include="Assets\GoogleVR\Shaders\GvrAdditiveOverlay.shader" />

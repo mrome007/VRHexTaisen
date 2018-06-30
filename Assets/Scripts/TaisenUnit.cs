@@ -1,10 +1,42 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TaisenUnit : MonoBehaviour 
 {
-    public HexTile OccupiedTile { get; set; }
+    public event EventHandler UnitDeath;
+
+    [SerializeField]
+    private int health;
+
+    public int Health 
+    { 
+        get
+        { 
+            return health; 
+        }
+    }
+
+    public HexTile OccupiedTile { get; private set; }
+
+    public void ApplyDamage(int damage)
+    {
+        health -= damage;
+        if(health <= 0)
+        {
+            PostDeath();
+        }
+    }
+
+    private void PostDeath()
+    {
+        var handler = UnitDeath;
+        if(handler != null)
+        {
+            handler(this, null);
+        }
+    }
 
     public void SetOccupiedTile(HexTile tile)
     {
