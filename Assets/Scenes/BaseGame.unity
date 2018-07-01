@@ -197,6 +197,60 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1894491d59f174c6fa6edd2b9dcab438, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &288518185
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4851646674879914, guid: b2216017b85f94d6e8795cd6387d6042, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851646674879914, guid: b2216017b85f94d6e8795cd6387d6042, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851646674879914, guid: b2216017b85f94d6e8795cd6387d6042, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851646674879914, guid: b2216017b85f94d6e8795cd6387d6042, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851646674879914, guid: b2216017b85f94d6e8795cd6387d6042, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851646674879914, guid: b2216017b85f94d6e8795cd6387d6042, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851646674879914, guid: b2216017b85f94d6e8795cd6387d6042, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851646674879914, guid: b2216017b85f94d6e8795cd6387d6042, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: b2216017b85f94d6e8795cd6387d6042, type: 2}
+  m_IsPrefabParent: 0
+--- !u!114 &288518186 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114277157935502994, guid: b2216017b85f94d6e8795cd6387d6042,
+    type: 2}
+  m_PrefabInternal: {fileID: 288518185}
+  m_Script: {fileID: 11500000, guid: 99612a2e3dc5b4359b7e3d22d23ce8d7, type: 3}
+--- !u!114 &288518187 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114996988157439382, guid: b2216017b85f94d6e8795cd6387d6042,
+    type: 2}
+  m_PrefabInternal: {fileID: 288518185}
+  m_Script: {fileID: 11500000, guid: 60686566c08874389bd09e1ddb4e1e7f, type: 3}
 --- !u!1001 &297467658
 Prefab:
   m_ObjectHideFlags: 0
@@ -440,7 +494,7 @@ GameObject:
   - component: {fileID: 1461177391}
   - component: {fileID: 1461177393}
   m_Layer: 0
-  m_Name: VRHexTaisen
+  m_Name: VRHexTaisenController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -458,11 +512,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players:
+    partyType: 0
     unitTurns:
     - {fileID: 1142667350}
     - {fileID: 1536822948}
   enemies:
-    unitTurns: []
+    partyType: 1
+    unitTurns:
+    - {fileID: 288518186}
 --- !u!4 &1461177392
 Transform:
   m_ObjectHideFlags: 0
@@ -492,7 +549,8 @@ MonoBehaviour:
   units:
   - {fileID: 869152282}
   - {fileID: 1536822946}
-  enemies: []
+  enemies:
+  - {fileID: 288518187}
 --- !u!1 &1536822945
 GameObject:
   m_ObjectHideFlags: 0

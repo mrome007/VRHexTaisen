@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyTaisenUnit : MonoBehaviour 
+public class EnemyTaisenUnit : TaisenUnit
 {
 
 }
