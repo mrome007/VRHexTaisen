@@ -177,7 +177,7 @@ public class TaisenVRScan : TaisenUnitTurn
         {
             CommitAction(points);
             unitMenu.UnitMenuInteraction(ActionType.ReturnUI);
-            turnActions.TurnActionInteraction(actionArgs.ActionType, actionArgs.Interactable);
+            turnActions.TurnActionInteraction(actionArgs.ActionType, actionArgs.Interactable, unit);
         }
 
         if(points == 0)

@@ -6,9 +6,19 @@ using UnityEngine;
 public class HexTaisenTurnsController : MonoBehaviour 
 {
     [SerializeField]
-    private List<TaisenUnitTurn> unitTurns;
+    private TaisenParty players;
+
+    [SerializeField]
+    private TaisenParty enemies;
 
     private int currentUnitTurn;
+    private List<TaisenUnitTurn> unitTurns;
+
+    private void Awake()
+    {
+        unitTurns = new List<TaisenUnitTurn>();
+        ArrangeTurns();
+    }
 
     public void StartHexTaisen()
     {
@@ -32,6 +42,12 @@ public class HexTaisenTurnsController : MonoBehaviour
 
         unitTurns[currentUnitTurn].TurnEnded -= HandleTurnEnded;
 
+        if(players.Dead || enemies.Dead)
+        {
+            EndTurns();
+            return;
+        }
+
         currentUnitTurn++;
         currentUnitTurn %= unitTurns.Count;
         StartUnitTurn();
@@ -50,5 +66,23 @@ public class HexTaisenTurnsController : MonoBehaviour
         {
             unitTurns[index].TurnEnded -= HandleTurnEnded;
         }
+    }
+
+    private void ArrangeTurns()
+    {
+        foreach(var turn in players)
+        {
+            unitTurns.Add(turn);
+        }
+
+        foreach(var turn in enemies)
+        {
+            unitTurns.Add(turn);
+        }
+    }
+
+    public void EndTurns()
+    {
+        //TODO DO SOMETHING HERE WHEN ONE OF THE PARTY DIES.
     }
 }

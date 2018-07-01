@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(TaisenUnitTurnActions))]
+[RequireComponent(typeof(TaisenUnit))]
 public class TaisenUnitTurn : MonoBehaviour 
 {
     public event EventHandler TurnStarted;
     public event EventHandler TurnEnded;
+    public TaisenUnit Unit { get { return unit; } }
 
     [SerializeField]
     protected int numberOfActionsPerTurn = 3;
@@ -25,11 +27,13 @@ public class TaisenUnitTurn : MonoBehaviour
     protected int catchActionPoints = 2;
 
     protected TaisenUnitTurnActions turnActions;
+    protected TaisenUnit unit;
 
     protected virtual void Awake()
     {
         currentNumberOfActions = 0;
         turnActions = GetComponent<TaisenUnitTurnActions>();
+        unit = GetComponent<TaisenUnit>();
     }
 
     public virtual void StartTurn()

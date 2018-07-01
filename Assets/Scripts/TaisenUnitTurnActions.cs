@@ -3,25 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(TaisenUnit))]
 public class TaisenUnitTurnActions : MonoBehaviour 
 {
     public event EventHandler<TurnActionEventArgs> ActionBegin;
     public event EventHandler<TurnActionEventArgs> ActionComplete;
 
-    private TaisenUnit unit;
-
-    private void Awake()
-    {
-        unit = GetComponent<TaisenUnit>();
-    }
-
-    public void TurnActionInteraction(ActionType act, GameObject interactable)
+    public void TurnActionInteraction(ActionType act, GameObject interactable, TaisenUnit unit)
     {
         switch(act)
         {
             case ActionType.MoveAction:
-                StartCoroutine(MoveAction(interactable));
+                StartCoroutine(MoveAction(interactable, unit));
                 break;
             /*
             case ActionType.AttackAction:
@@ -37,7 +29,7 @@ public class TaisenUnitTurnActions : MonoBehaviour
         }
     }
 
-    private IEnumerator MoveAction(GameObject interactable)
+    private IEnumerator MoveAction(GameObject interactable, TaisenUnit unit)
     {
         PostActionBegin(new TurnActionEventArgs(false));
         unit.OccupiedTile.AdjacentTiles.ForEach(adjTile => adjTile.EnableHexCollider(false));

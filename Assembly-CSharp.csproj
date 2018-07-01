@@ -189,6 +189,7 @@
      <Compile Include="Assets\Scripts\TaisenDragZone.cs" />
      <Compile Include="Assets\Scripts\TaisenGazeableButton.cs" />
      <Compile Include="Assets\Scripts\TaisenInteractable.cs" />
+     <Compile Include="Assets\Scripts\TaisenParty.cs" />
      <Compile Include="Assets\Scripts\TaisenUnit.cs" />
      <Compile Include="Assets\Scripts\TaisenUnitMenuActions.cs" />
      <Compile Include="Assets\Scripts\TaisenUnitTurn.cs" />

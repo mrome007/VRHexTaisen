@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//TODO TEMPORARY CLASS THAT CREATES THE WORLD AND SETS UP THE PLAYERS.
 public class HexTaisenStart : MonoBehaviour 
 {
     [SerializeField]
