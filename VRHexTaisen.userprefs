@@ -1,20 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/HexTaisenTurnsController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TaisenParty.cs">
     <Files>
-      <File FileName="Assets/Scripts/TaisenUnitTurn.cs" Line="114" Column="28" />
-      <File FileName="Assets/Scripts/EnemyTaisenUnit.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/HexTaisenTurnsController.cs" Line="14" Column="6" />
-      <File FileName="Assets/Scripts/TaisenVRScan.cs" Line="195" Column="5" />
-      <File FileName="Assets/Scripts/TaisenUnitTurnActions.cs" Line="52" Column="5" />
-      <File FileName="Assets/Scripts/TaisenUnit.cs" Line="20" Column="5" />
-      <File FileName="Assets/Scripts/HexTile.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/HexTaisenStart.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/TilesCreator.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/TaisenUnitMenuActions.cs" Line="12" Column="5" />
-      <File FileName="Assets/Scripts/GazeableObject.cs" Line="42" Column="1" />
-      <File FileName="Assets/Scripts/TaisenGazeableButton.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/TurnActionEventArgs.cs" Line="8" Column="12" />
+      <File FileName="Assets/Scripts/TaisenUnitTurnActions.cs" Line="11" Column="17" />
+      <File FileName="Assets/Scripts/TaisenUnitTurn.cs" Line="12" Column="47" />
+      <File FileName="Assets/Scripts/TaisenUnit.cs" Line="15" Column="12" />
+      <File FileName="Assets/Scripts/HexTaisenTurnsController.cs" Line="45" Column="1" />
+      <File FileName="Assets/Scripts/TaisenParty.cs" Line="13" Column="27" />
+      <File FileName="Assets/Scripts/HexTaisenStart.cs" Line="5" Column="71" />
+      <File FileName="Assets/Scripts/TaisenVRScan.cs" Line="180" Column="99" />
+      <File FileName="Assets/Scripts/EnemyTaisenUnit.cs" Line="5" Column="42" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
